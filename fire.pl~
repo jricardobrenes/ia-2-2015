@@ -57,6 +57,9 @@ plFire(R,C,B,Result):-
 	append(M,D,Result).
 
 %pcFire(R,C,A,B,Result):-
+	%calculate(row,col),
+	%askUser miss/hit,
+	%miss? Action = -1 | hit? Action = 1,
 	%getRow(R,0,B,Row,L,D),
         %pcShoot(C,Action,Row,NewRow),
         %append(L,[NewRow],M),
