@@ -2,8 +2,8 @@
 
 
 getData(CPUBoard,Vectors):-
-	getBoard('cpuboard.txt',CPUBoard),
-	getVectors('vectors.txt',Vectors).
+	getBoard('../cpuboard.txt',CPUBoard),
+	getVectors('../vectors.txt',Vectors).
 
 getBoard(Name,Board):-
 	open(Name,read,Str),
