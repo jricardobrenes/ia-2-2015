@@ -1,12 +1,19 @@
 :-[fileReader].
+:-[loop].
 
+
+copy(L,R) :- accCp(L,R).
+accCp([],[]).
+accCp([H|T1],[H|T2]) :- accCp(T1,T2).
 
 start():-
 	getData(EmptyBoard,CPUBoard,Rows,Columns),
+	copy(EmptyBoard,PCEmptyBoard),
 	printBoard(CPUBoard),
-	printBoard(EmptyBoard),
-	write(Rows),nl,
-	write(Columns).
+	writeln(Rows),
+	writeln(Columns),
+	loop(EmptyBoard,PCEmptyBoard,CPUBoard,Rows,Columns).
+
 
 find([H|_],H,0).
 
