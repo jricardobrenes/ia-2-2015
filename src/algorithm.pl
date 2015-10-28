@@ -1,19 +1,3 @@
-:-[fileReader].
-:-[loop].
-
-
-copy(L,R) :- accCp(L,R).
-accCp([],[]).
-accCp([H|T1],[H|T2]) :- accCp(T1,T2).
-
-start():-
-	getData(EmptyBoard,CPUBoard,Rows,Columns),
-	copy(EmptyBoard,PCEmptyBoard),
-	printBoard(CPUBoard),
-	loop(EmptyBoard,PCEmptyBoard,CPUBoard,Rows,Columns),
-	writeln(Rows),
-	writeln(Columns).
-
 find([H|_],H,0).
 
 find([],-1,_).
@@ -37,4 +21,3 @@ getMax([H|T],Max):-
 getMax([H|T],Max):-
 	getMax(T,Max),
 	Max > H.
-
