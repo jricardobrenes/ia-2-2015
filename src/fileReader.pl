@@ -35,6 +35,36 @@ getCosts(Stream,[H|T]):-
 
 
 
+getCost(Stream,[H|T]):-
+	open('../vectors.txt',read,Str),
+	readWord(Str,W),
+	close(Str),
+	write(W).
+
+readWord(InStream,W):-
+         get_code(InStream,Char),
+         checkCharAndReadRest(Char,Chars,InStream),
+         atom_codes(W,Chars).
+
+
+cleanString([],Temp,[_|Temp]).
+cleanString([H|T],Temp,Result):-
+	H=',',
+
+
+
+checkCharAndReadRest(10,[],_):-  !.
+
+checkCharAndReadRest(32,[],_):-  !.
+
+checkCharAndReadRest(-1,[],_):-  !.
+
+checkCharAndReadRest(end_of_file,[],_):-  !.
+
+checkCharAndReadRest(Char,[Char|Chars],InStream):-
+         get_code(InStream,NextChar),
+         checkCharAndReadRest(NextChar,Chars,InStream).
+
 
 
 

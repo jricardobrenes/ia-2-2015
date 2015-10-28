@@ -4,10 +4,10 @@
 test():-
 	%getData(EmptyBoard,CPUBoard,Rows,Columns),
 	getData(_,_,_,Columns),
-%	max_list(Columns,X,Y),
-	write(Columns).
-%	write(X),
-%	write(Y).
+	max_list(Columns,X,Y),
+	write(Columns),
+	write(X),
+	write(Y).
 
 %getMax(Columns,Board,indActual,indMax,Val).
 getMax([],-1,0).

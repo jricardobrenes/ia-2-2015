@@ -1,6 +1,6 @@
 :-[fileReader].
 :-[utils].
-
+:-[algorithm].
 
 start():-
 	getData(EmptyBoard,CPUBoard,Rows,Columns),
@@ -10,4 +10,3 @@ start():-
 	printBoard(EmptyBoard2),
 	write(Rows),nl,
 	write(Columns).
-
