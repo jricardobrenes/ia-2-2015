@@ -1,9 +1,9 @@
 :- [printer].
 
 
-getData(CPUBoard,Vectors):-
-	getBoard('cpuboard.txt',CPUBoard),
-	getVectors('vectors.txt',Vectors).
+getData(CPUBoard,Rows,Columns):-
+	getBoard('../cpuboard.txt',CPUBoard),
+	getVectors('../vectors.txt',Rows,Columns).
 
 getBoard(Name,Board):-
 	open(Name,read,Str),
@@ -18,9 +18,9 @@ getLines(Stream,[H|T]):-
 	string_chars(X,H),
 	getLines(Stream,T).
 
-getVectors(Name,Vectors):-
+getVectors(Name,Rows,Columns):-
 	open(Name,read,Str),
-	getCosts(Str,Vectors),
+	getCosts(Str,[Rows|[Columns|_]]),
 	close(Str).
 
 getCosts(Stream,[]):-
