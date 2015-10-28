@@ -45,23 +45,6 @@ getRow(R,Rc,[H|T],Row,[H|Tl],D):- Rc2 is Rc+1, getRow(R,Rc2,T,Row,Tl,D).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-print([]).
-print([H|T]):- writeln(H), print(T).
-
-plFire(R,C,B,E,Res):-
-	getRow(R,0,B,Row,_,_),
-	plShoot(C,Row,Res),
-	((Res == 1, writeln('HIT'));(Res == -1, writeln('MISS'))),
-	pcFire(R,C,Res,E,M),
-	print(M).
-
-pcFire(R,C,A,B,Res):-
-	getRow(R,0,B,Row,L,D),
-        pcShoot(C,A,Row,NewRow),
-        append(L,[NewRow],M),
-	append(M,D,Res).
-
-
 sampleMatrix([['X','X','X','X','X','X','X','X','X','X'],
 ['X','X','X','X','S','X','X','X','X','X'],
 ['X','X','X','X','X','X','X','X','X','X'],
@@ -83,3 +66,20 @@ emptyMatrix([['X','X','X','X','X','X','X','X','X','X'],
 ['X','X','X','X','X','X','X','X','X','X'],
 ['X','X','X','X','X','X','X','X','X','X'],
 ['X','X','X','X','X','X','X','X','X','X']]).
+
+
+print([]).
+print([H|T]):- writeln(H), print(T).
+
+plFire(R,C,B,E,Res):-
+	getRow(R,0,B,Row,_,_),
+	plShoot(C,Row,Res),
+	((Res == 1, writeln('HIT'));(Res == -1, writeln('MISS'))),
+	pcFire(R,C,Res,E,M),
+	print(M).
+
+pcFire(R,C,A,B,Res):-
+	getRow(R,0,B,Row,L,D),
+        pcShoot(C,A,Row,NewRow),
+        append(L,[NewRow],M),
+	append(M,D,Res).
