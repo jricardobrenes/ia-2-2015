@@ -1,8 +1,9 @@
 :- [printer].
 
 
-getData(CPUBoard,Rows,Columns):-
+getData(EmptyBoard,CPUBoard,Rows,Columns):-
 	getBoard('../cpuboard.txt',CPUBoard),
+	getBoard('../emptyboard.txt',EmptyBoard),
 	getVectors('../vectors.txt',Rows,Columns).
 
 getBoard(Name,Board):-

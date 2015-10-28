@@ -2,9 +2,10 @@
 
 
 start():-
-	getData(CPUBoard,Rows,Columns),
+	getData(EmptyBoard,CPUBoard,Rows,Columns),
 	printBoard(CPUBoard),
-	write(Rows),
+	printBoard(EmptyBoard),
+	write(Rows),nl,
 	write(Columns).
 
 find([H|_],H,0).
