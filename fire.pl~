@@ -1,6 +1,3 @@
-%appendLists([],L,L).
-%appendLists([H|T1],L2,[H|T2]):- appendLists(T1,L2,T2).
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SHOOT:                                                          %
 %   - Recibe una fila (lista)                                     %
@@ -10,19 +7,16 @@
 %   - Devuelve la nueva fila con -1 o 1 en la pos. respectiva     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+plShoot(C,C,['X'|_], -1).
+plShoot(C,C,[_|_], 1).
+plShoot(C,Cc,[_|T],R):-	Cc2 is Cc+1, plShoot(C,Cc2,T,R).
+plShoot(C,L,R):- plShoot(C,0,L,R).
 
-plShoot(_,_,[],[]).
-plShoot(C,C,['X'|T],[-1|T2]):- Cc is C+1, plShoot(C,Cc,T,T2), writeln('MISS!!').
-plShoot(C,C,[_|T],[1|T2]):- Cc is C+1, plShoot(C,Cc,T,T2), writeln('HIT!!').
-plShoot(C,Cc,[H|T],[H|T2]):- Cc2 is Cc+1, plShoot(C,Cc2,T,T2).
-plShoot(C,L,M):- plShoot(C,0,L,M).
 
 pcShoot(_,_,_,[],[]).
 pcShoot(C,C,A,[_|T],[A|T2]):- Cc is C+1, pcShoot(C,Cc,A,T,T2).
 pcShoot(C,Cc,A,[H|T],[H|T2]):- Cc2 is Cc+1, pcShoot(C,Cc2,A,T,T2).
 pcShoot(C,A,L,M):- pcShoot(C,0,A,L,M).
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GETROW:			                                  %
@@ -49,19 +43,43 @@ getRow(R,Rc,[H|T],Row,[H|Tl],D):- Rc2 is Rc+1, getRow(R,Rc2,T,Row,Tl,D).
 %   - Concatena lado izq. (L) con NewRow y lado der. (D)          %
 %     para devolver la nueva matriz                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 
-plFire(R,C,B,Result):-
+sampleMatrix([['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','S','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','D','X','X','X','X','X','S'],
+['X','X','X','D','X','X','X','X','X','X'],
+['X','X','X','X','X','D','D','X','X','X'],
+['X','X','S','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','S','X','X','X','X','X','X','D','X'],
+['X','X','X','X','X','X','X','X','D','X']]).
+
+emptyMatrix([['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X'],
+['X','X','X','X','X','X','X','X','X','X']]).
+
+
+print([]).
+print([H|T]):- writeln(H), print(T).
+
+plFire(R,C,B,E,Res):-
+	getRow(R,0,B,Row,_,_),
+	plShoot(C,Row,Res),
+	((Res == 1, writeln('HIT'));(Res == -1, writeln('MISS'))),
+	pcFire(R,C,Res,E,M),
+	print(M).
+
+pcFire(R,C,A,B,Res):-
 	getRow(R,0,B,Row,L,D),
-	plShoot(C,Row,NewRow),
-	append(L,[NewRow],M),
-	append(M,D,Result).
-
-%pcFire(R,C,A,B,Result):-
-	%calculate(row,col),
-	%askUser miss/hit,
-	%miss? Action = -1 | hit? Action = 1,
-	%getRow(R,0,B,Row,L,D),
-        %pcShoot(C,Action,Row,NewRow),
-        %append(L,[NewRow],M),
-	%append(M,D,Result).
-
+        pcShoot(C,A,Row,NewRow),
+        append(L,[NewRow],M),
+	append(M,D,Res).
