@@ -1,6 +1,5 @@
 :-[fileReader].
 :-[loop].
-:-[utils].
 
 start():-
 	getData(EmptyBoard,CPUBoard,Rows,Columns),

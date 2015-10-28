@@ -1,10 +1,11 @@
 :-[fire].
+:-[utils].
 
 
 loop(PlEmptyBoard,PCEmptyBoard,CPUBoard,Rows,Columns):-
-	write('Ingrese La Fila de su disparo:'),
-	read(Row),
-	write('Ingrese la columna de su disparo:'),
+	write('Ingrese La Fila de su disparo (Con comillas simples \'\'): '),
+	read(RowLett), getIndex(RowLett,Row),
+	write('Ingrese la columna de su disparo: '),
 	read(Col),
 	write('Disparo en la casilla: '),
 	writeln([Row,Col]),%!Llamada a funcion de disparar
@@ -24,3 +25,15 @@ loop(PlEmptyBoard,PCEmptyBoard,CPUBoard,Rows,Columns):-
 	printBoard(NewPCEmptyBoard),
 	writeln("----------------------------"),
 	loop(NewPlEmptyBoard,NewPCEmptyBoard,CPUBoard,Rows,Columns).
+
+
+
+
+
+
+
+
+
+
+
+
