@@ -1,14 +1,6 @@
 :-[fileReader].
 
 
-start():-
-	max_list([10,0,0,0,2,0,0,0,0,9],V,I,[1]),
-	write(V - I).
-
-test():-
-	getData(EmptyBoard,_,Rows,Columns),
-	getCoords(EmptyBoard,Rows,Columns,X,Y,[]),
-	write(X),write(','),write(Y).
 
 getCoords(Board,Rows,Columns,X,Y,Excluded):-
 	max_list(Columns,_,Y,Excluded),
@@ -58,43 +50,3 @@ checkShoot([[_|T]|T2],1,C,Result):-
 checkShoot([_|T],R,C,Result):-
 	NR is R -1,
 	checkShoot(T,NR,C,Result).
-
-dec([Y|T],1,[X|T]):-
-	X is Y-1.
-dec([H|T1],E,[H|T2]):-
-	E2 is E - 1,
-	dec(T1,E2,T2).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-getMax2([X],X).
-getMax2([X|T],X):- getMax2(T,Y), X >= Y.
-getMax2([X|T],N):- getMax2(T,N), N > X.
-
-find([H|_],H,0).
-
-find([],-1,_).
-
-find([_|T],Element,Index):-
-	find(T,Element,NextIndex),
-	NextIndex > -1,
-	Index is NextIndex+1.
-
-find([_|T],Element,Index):-
-	find(T,Element,NextIndex),
-	NextIndex = -1,
-	Index is NextIndex.
