@@ -1,6 +1,10 @@
 :- [printer].
 
 
+start():-
+	getData(_,_,R,_),
+	write(R).
+
 getData(EmptyBoard,CPUBoard,Rows,Columns):-
 	getBoard('../cpuboard.txt',CPUBoard),
 	getBoard('../emptyboard.txt',EmptyBoard),
@@ -12,7 +16,7 @@ getBoard(Name,Board):-
 	close(Str).
 
 getLines(Stream,[]):-
-	at_end_of_stream(Stream).
+	at_end_of_stream(Stream),!.
 getLines(Stream,[H|T]):-
 	\+at_end_of_stream(Stream),
 	read(Stream,X),
@@ -21,31 +25,24 @@ getLines(Stream,[H|T]):-
 
 getVectors(Name,Rows,Columns):-
 	open(Name,read,Str),
-	getCosts(Str,[Rows|[Columns|_]]),
+	getCosts(Str,Rows,Columns),
 	close(Str).
 
-getCosts(Stream,[]):-
-	at_end_of_stream(Stream).
-getCosts(Stream,[H|T]):-
-	\+at_end_of_stream(Stream),
-	read(Stream,X),
-	string_chars(X,F),
-	delete(F,',',H),
-	getCosts(Stream,T).
+getCosts(Stream,Rows,Columns):-
+	readLine(Stream,Rows,10),
+	readLine(Stream,Columns,10).
 
+readLine(_,[],0):-!.
+readLine(Str,[H|T],N):-
+	readWord(Str,H),
+	N1 is N-1,
+	readLine(Str,T,N1).
 
-
-tes():-
-	open('../vectors.txt',read,Str),
-	readWord(Str,W),
-	close(Str),
-	write(W).
-
-readWord(InStream,W):-
+readWord(InStream,X):-
          get_code(InStream,Char),
          checkCharAndReadRest(Char,Chars,InStream),
-         atom_codes(W,Chars).
-
+         atom_codes(W,Chars),
+	 atom_number(W,X).
 
 checkCharAndReadRest(10,[],_):-  !.
 
