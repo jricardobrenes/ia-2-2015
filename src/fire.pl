@@ -45,7 +45,7 @@ getRow(R,Rc,[H|T],Row,[H|Tl],D):- Rc2 is Rc+1, getRow(R,Rc2,T,Row,Tl,D).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-plFire(R,C,B,E,Res):-
+plFire(R,C,B,E,Res,Action):-
 	getRow(R,1,B,Row,_,_),
 	plShoot(C,Row,Action), write('ACTION: '),writeln(Action),
 	((Action == 'X', writeln('HIT'));(Action == 'O', writeln('MISS'))),
