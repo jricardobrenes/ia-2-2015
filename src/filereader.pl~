@@ -1,6 +1,7 @@
 :- [printer].
 
 
+<<<<<<< HEAD
 start():-
 	getData(_,_,R,_),
 	write(R).
@@ -8,6 +9,12 @@ start():-
 getData(EmptyBoard,CPUBoard,Rows,Columns):-
 	getBoard('../cpuboard.txt',CPUBoard),
 	getBoard('../emptyboard.txt',EmptyBoard),
+=======
+getData(PlEmptyBoard,PCEmptyBoard,CPUBoard,Rows,Columns):-
+	getBoard('../cpuboard.txt',CPUBoard),
+	getBoard('../emptyboard.txt',PlEmptyBoard),
+	getBoard('../emptyboard.txt',PCEmptyBoard),
+>>>>>>> cf1678539ddd860c46b569617905ac0a8114580f
 	getVectors('../vectors.txt',Rows,Columns).
 
 getBoard(Name,Board):-
